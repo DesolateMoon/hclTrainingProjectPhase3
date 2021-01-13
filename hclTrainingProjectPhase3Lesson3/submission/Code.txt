@@ -1,0 +1,208 @@
+package com.junit;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+@SpringBootApplication
+public class JunitApplication {
+
+	public static void main(String[] args) {
+		SpringApplication.run(JunitApplication.class, args);
+	}
+}
+
+------------------------------------------------
+
+package com.junit;
+
+import java.util.HashSet;
+import java.util.Set;
+import java.util.concurrent.atomic.AtomicBoolean;
+
+import com.junit.model.User;
+
+public class Authentication {
+	
+	public static Set<User> userList = new HashSet<>();
+	
+	private User currentSessionUser = null;
+
+	public boolean login(String userName, String password) {
+		AtomicBoolean userExists = new AtomicBoolean(false);
+		userList.stream().filter(x -> x.getUserName().equals(userName) && x.getPassword().equals(password)).findFirst()
+					.ifPresent(x -> {
+						userExists.set(true);
+						currentSessionUser = x;
+						});
+		return userExists.get();
+	}
+
+	public String getRole() {
+		if(currentSessionUser != null) {
+			return currentSessionUser.getRole();
+		}
+		return null;
+	}
+	
+	public String getUserName() {
+		if(currentSessionUser != null) {
+			return currentSessionUser.getUserName();
+		}
+		return null;
+	}
+	
+	public void logout() {
+		currentSessionUser = null;
+	}
+}
+
+------------------------------------------------
+
+package com.junit;
+
+import static org.assertj.core.api.Assertions.assertThatNullPointerException;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+import com.junit.model.User;
+
+public class AuthenticationTest {
+
+		@BeforeEach
+		public void setup() {
+			Authentication.userList.add(User.builder().userName("Austin").password("pass").role("Admin").build());
+			Authentication.userList.add(User.builder().userName("Julia").password("foo").role("User").build());
+			Authentication.userList.add(User.builder().userName("Lan").password("bar").role("Developer").build());
+			Authentication.userList.add(User.builder().userName("Chuong").password("jar").role("Tester").build());
+		}
+	
+		@Test
+		public void testLogin() {
+			Authentication authentication = new Authentication();
+			assertEquals(true, authentication.login("Austin", "pass"));
+		}
+		
+		@Test
+		public void testWrongUserLogin() {
+			Authentication authentication = new Authentication();
+			assertEquals(false, authentication.login("Krishna", "pass"));
+		}
+		
+		@Test
+		public void testRoleAssert() {
+			Authentication authentication = new Authentication();
+			assertEquals(true, authentication.login("Austin", "pass"));
+			assertEquals("Admin", authentication.getRole());
+		}
+		
+		@Test
+		public void testUserAssert() {
+			Authentication authentication = new Authentication();
+			assertEquals(true, authentication.login("Austin", "pass"));
+			assertEquals("Austin", authentication.getUserName());
+		}
+		
+		@Test
+		public void testLogout() {
+			Authentication authentication = new Authentication();
+			authentication.logout();
+			assertEquals(null, authentication.getRole());
+		}
+}
+
+------------------------------------------------
+
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>2.4.1</version>
+		<relativePath /> <!-- lookup parent from repository -->
+	</parent>
+	<groupId>com</groupId>
+	<artifactId>junit</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<name>hclTrainingProjectPhase3Lesson3</name>
+	<description>Demo project for Spring Boot</description>
+
+	<properties>
+		<java.version>1.8</java.version>
+	</properties>
+
+	<dependencies>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-jpa</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-devtools</artifactId>
+			<scope>runtime</scope>
+			<optional>true</optional>
+		</dependency>
+
+		<dependency>
+			<groupId>com.h2database</groupId>
+			<artifactId>h2</artifactId>
+			<scope>runtime</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<optional>true</optional>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>jstl</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.tomcat.embed</groupId>
+			<artifactId>tomcat-embed-jasper</artifactId>
+			<scope>runtime</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<scope>runtime</scope>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+				<configuration>
+					<excludes>
+						<exclude>
+							<groupId>org.projectlombok</groupId>
+							<artifactId>lombok</artifactId>
+						</exclude>
+					</excludes>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+</project>
