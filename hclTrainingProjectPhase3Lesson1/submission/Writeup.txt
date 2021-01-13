@@ -1,0 +1,18 @@
+This program searches for a specific user and updates the user information. It is a Spring MVC web 
+application that will retrieve users based on their user ID. the retrieved user data will then be 
+edited in a form and updated in the database. The entire database processing will be done using Hibernate 
+and the front pages will be made in JSP. If the ID is invalid, a JSP page will be displayed with an
+error message. The standard methodlogy of creating controllers, services, dao, and entity classes were
+applied. 
+
+I created the project utilizing start.spring.io. I imported devtools along with other necessary dependencies.
+I then created a simple POJO for the User. This was followed by creating two interfaces for the service and
+DAO. I then created the Controller which will be the core of this application. I started with a preloaded 
+database so I worked on the search functionality first along with the corresponding jsp page. In order
+to get this functionality working, I need to implement UserService which implements UserDAO. After this was
+done it was mostly code reptition to get the other parts working. 
+
+By writing this program, I have displayed various skills I have learned. I utilized the Eclipse IDE which 
+helped me write my program as well as used Git for version control. Apache Tom Cat was utilized as the 
+web server along with Spring MVC with Hibernate, log4j as the logger, and MySQL Connector for the 
+database. 
