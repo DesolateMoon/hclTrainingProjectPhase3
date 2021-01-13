@@ -1,0 +1,16 @@
+This program handles User Authentication. It is a standalone project which will do unit testing of the
+user authentication class which is used in the main web application. The JUnit class will test all aspects
+of the authentication class. The test suite that is being created will do unit testing of all backend
+components in the web application. It will not directly test servlets or web pages. It will only test
+the classes that have the business logic. 
+
+I created a simple maven project. I then created a User POJO utilizing lombok. I then continued to create 
+the Authentication class which will handle the main functionality of the program. It will allow someone to
+login, logout, getRole, getUsername. I then wrote a tester in the src/test/java to begin the JUnit 
+requirement. For the JUnit tests to be identified I used the necessary @Test annotation. However,
+I want the data to prepopulated before each test so I used the @BeforeEach annotation to do the necessary.
+I then utilized the basic assertEquals to test the needed functionality.
+
+By writing this program, I have displayed various skills I have learned. I utilized the Eclipse IDE which 
+helped me write my program as well as used Git for version control. Apache Tom Cat was utilized as the 
+web server, and Jupiter Junit5. 
