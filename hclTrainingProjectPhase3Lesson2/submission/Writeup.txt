@@ -1,0 +1,17 @@
+This program displays User feedback. It is a Spring Boot project that will capture user feedback using
+a REST endpoint. The REST resouroce will take in parameters using HTTP Post. THe feedback data will be
+then added to a database table. Feedback data will be received from third-party apps and websites. The 
+data will be sent to the REST API which will collect feedback from various sources. The repository class
+will follow the design guidelines  as it will be mapped to the entity class to the CrudRepository interface.
+
+I created the project utilizing start.spring.io. I imported devtools along with other necessary dependencies.
+I then created a simple POJO for the Product and Feedback. I linked the two databases together using the 
+annotations for onetomany and manytoone mapping. I then created the Controller which will be the core of this 
+application. I started with implementing addProduct first along with the corresponding jsp page. In order to
+get this functionality wokring I had to implement ProductDAO which extends CrudRepository. After this was
+done it was mostly code reptition to get the other parts working. One nuance that I had to implement was in 
+addReview. I needed a sorter so I had to implement a comparator Feedback.
+
+By writing this program, I have displayed various skills I have learned. I utilized the Eclipse IDE which 
+helped me write my program as well as used Git for version control. Apache Tom Cat was utilized as the 
+web server, and Spring Boot with Hibernate. 
