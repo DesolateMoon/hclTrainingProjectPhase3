@@ -1,0 +1,46 @@
+This program creates a task manager application. It is created utilizing Spring Boot
+as well as Spring Data JPA. The application's UI will be in JSP. This allows for core
+logic to happen will beautifying the page using Bootstrap. The application has the needed
+four JSP pages (create task, display tasks, delete tasks, and update task) along with
+two additional pages that allows user registration and login to help meet the criteria
+outlined in the document. The project is well organized following a specific hierarchy.
+The naming conventions for the packages follows the documentation (DAO, Service, 
+Entity, Config, Controller and Custom Exception Handling). Also the utilization of 
+swagger helped created further documentation to show that the project reflects the needed
+design. Furthermore as required, all of the server data in the MySQL database will persist. 
+
+I created the project utilizing start.spring.io. I imported devtools along with other necessary 
+dependencies. I started with registering and loggin a user first. Thus, I created a simple POJO
+for the User using Lombok. This was followed by creating two JSP pages for the reigster and login
+with some Bootstrap as well. I then created a UserDAO which will handle all the CRUD operations
+for me. I then started working on the controller to properly display the two JSP pages we just 
+created as well as the logic of creating a new user (register) and searching if the user
+we are looking for is in the database (login). After accomplishing this, we ensured that
+the user must get registered to perform the login as well as the user must be logged in before
+adding or seeing the tasks. 
+
+I then started on the heart of the project which is the tasks. I began with add tasks and it's
+corresponding JSP. Thus, I needed to create a simple POJO for the Task using Lombok. I also
+created a TaskDAO which will handle all the CRUD operations for me. I then started working
+on the controller to display the add JSP page we made as well as the logic of creating a new task.
+Upon completion, I checked the MySQL database to ensure that the data I wanted inputted was succesfully
+persisting in the database. I then continued my journey by creating the main display page which will
+output all the tasks in the database. Thus, I needed to create a function that fetched all the 
+records. This was relatively straightforward since our TaskDAO easily handles all the CRUD operations.
+Because of this I was able to fetch all the needed records and print out the necessary data onto
+our new main JSP page that the user can see. 
+
+The next part of the project was to create an update/delete feature. I only needed to make one more JSP
+page where we will give the user both option to save or delete the task. The user is able to navigate
+to this JSP by an href that has the specific task ID. Both these features are straight forward since
+our TaskDAO easily handles all the CRUD operations. I also wanted to ensure that these operations always
+functioning properly so I created custom exceptions (InvalidOptionException & FailedDeleteException).
+If any of these exceptions are thrown the User will be redirected to the login page as this an unexpected
+behavior happened. This may happen by the user inputting their own URL. By accomplishing this project,
+I feel like I am able to conquer anything now!
+
+By writing this program, I have displayed various skills I have learned. I utilized the Eclipse IDE which 
+helped me write my program as well as used Git for version control. Apache Tom Cat was utilized as the 
+web server along with Spring MVC with Hibernate, Spring Security for Login Authentication, Lombok to ease
+boiler plate code, Swagger to generate the docs and UI, BootStrap for a more aesthetically pleasing website,
+and MySQL Connector for the database. 
