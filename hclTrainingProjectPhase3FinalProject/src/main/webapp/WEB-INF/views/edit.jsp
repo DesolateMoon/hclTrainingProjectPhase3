@@ -36,7 +36,7 @@
 				End Date: <input type= "date" name="end" value=${task.getEnd()} required="required"> </br>
 				
 				<label class="card-header">Description:</label> 
-				<input class="form-control" type="text" name="description" value=${task.getDescription()} required="required">
+				<input class="form-control" type="text" name="description" required="required">
 				<label class="card-header">Email:</label> 
 				<input class="form-control" type="text" name="email" value=${task.getEmail()} required="required">
 				<label class="card-header">Severity:</label> 
